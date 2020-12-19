@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import tasks1.*;
 import tasks2.*;
 
-class homeworktests {
+class homeworkTests {
 
 	@Test
 	void circleGetAreaTest() {
