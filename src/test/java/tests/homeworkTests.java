@@ -143,4 +143,14 @@ class homeworkTests {
 		assertTrue(c1.collides(ball));
 		assertTrue(!c2.collides(ball));
 	}
+	
+	@Test
+	void myPolynomialEvaluateTest() {
+		double[] coe = { 1, 1 };
+		MyPolynomial p1 = new MyPolynomial(coe);
+		assertEquals(2, p1.evaluate(1));
+		double[] coe2 = { 1, 2, 1 };
+		MyPolynomial p2 = new MyPolynomial(coe2);
+		assertEquals(4, p2.evaluate(1));
+	}
 }

@@ -41,7 +41,7 @@ public class MyPolynomial {
 	public double evaluate(double x) {
 		double res = 0;
 		for (int i = 0; i < coeffs.length; i++) {
-			res += coeffs[i] * (i + 1);
+			res += coeffs[i] * Math.pow(x, i);
 		}
 		return res;
 	}
