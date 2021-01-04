@@ -1,5 +1,7 @@
 package tasks2;
 
+import tasks1.MyPoint;
+
 public class MyComplex {
 	private double real = 0.0;
 	private double imag = 0.0;
@@ -11,6 +13,27 @@ public class MyComplex {
 	public MyComplex(double real, double imag) {
 		this.real = real;
 		this.imag = imag;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) real;
+		result = prime * result + (int) imag;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		MyComplex com = (MyComplex) obj;
+		if ((this.real == com.getReal()) && (this.imag == com.getImag()))
+			return true;
+		else
+			return false;
 	}
 
 	public double getReal() {

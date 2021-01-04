@@ -13,6 +13,27 @@ public class MyPoint {
 		this.y = y;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) x;
+		result = prime * result + (int) y;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		MyPoint myPoint = (MyPoint) obj;
+		if ((this.x == myPoint.getX()) && (this.y == myPoint.getY()))
+			return true;
+		else
+			return false;
+	}
+
 	public double getX() {
 		return x;
 	}
@@ -47,7 +68,7 @@ public class MyPoint {
 	}
 
 	public double distance(double x, double y) {
-		return Math.sqrt((x - this.x) * (x - this.x) + (y-this.y) * (y-this.y));
+		return Math.sqrt((x - this.x) * (x - this.x) + (y - this.y) * (y - this.y));
 	}
 
 	public double distance(MyPoint another) {

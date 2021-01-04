@@ -13,6 +13,27 @@ public class Rectangle {
 		this.width = width;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) length;
+		result = prime * result + (int) width;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		Rectangle rect = (Rectangle) obj;
+		if ((this.length == rect.getLength()) && (this.width == rect.getWidth()))
+			return true;
+		else
+			return false;
+	}
+
 	public float getLength() {
 		return length;
 	}
@@ -36,7 +57,7 @@ public class Rectangle {
 	public double getPerimeter() {
 		return width * 2 + 2 * length;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Rectangle[length=" + length + ",width=" + width + "]";

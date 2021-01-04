@@ -13,6 +13,28 @@ public class Employee {
 		this.salary = salary;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id + firstName.length();
+		result = prime * result + salary + lastName.length();
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		Employee employee = (Employee) obj;
+		if ((this.firstName.equals(employee.getFirstName())) && (this.lastName.equals(employee.getLastName()))
+				&& (this.id == employee.id) && (this.salary == employee.salary))
+			return true;
+		else
+			return false;
+	}
+
 	public int getId() {
 		return id;
 	}

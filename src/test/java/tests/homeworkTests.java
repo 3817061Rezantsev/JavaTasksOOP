@@ -2,8 +2,12 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Test;
 
+import collections1.ILinkedList;
+import collections1.MyLinkedList;
 import tasks1.*;
 import tasks2.*;
 
@@ -129,10 +133,14 @@ class homeworkTests {
 
 	@Test
 	void myPolynomialMulTest() {
-		double[] coe = { 1, 1 };
+		double[] coe = { 1, 1, 0 };
 		MyPolynomial p1 = new MyPolynomial(coe);
 		MyPolynomial p2 = new MyPolynomial(coe);
 		assertEquals("x^2+2.0x+1.0", p2.multiply(p1).toString());
+		double[] coe11 = { 1, 0, 0 };
+		p1 = new MyPolynomial(coe11);
+		p2 = new MyPolynomial(coe11);
+		assertEquals("+1.0", p2.multiply(p1).toString());
 	}
 
 	@Test
@@ -143,7 +151,7 @@ class homeworkTests {
 		assertTrue(c1.collides(ball));
 		assertTrue(!c2.collides(ball));
 	}
-	
+
 	@Test
 	void myPolynomialEvaluateTest() {
 		double[] coe = { 1, 1 };
@@ -152,5 +160,205 @@ class homeworkTests {
 		double[] coe2 = { 1, 2, 1 };
 		MyPolynomial p2 = new MyPolynomial(coe2);
 		assertEquals(4, p2.evaluate(1));
+	}
+
+	@Test
+	void myLinkedListAddAndGetTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		list.add(-1);
+		list.add(2);
+		assertEquals(0, list.get(0));
+		assertEquals(-1, list.get(1));
+		assertEquals(2, list.get(2));
+		list.add(0, -1);
+		assertEquals(-1, list.get(0));
+		assertEquals(0, list.get(1));
+		list.add(2, 5);
+		assertEquals(5, list.get(2));
+		assertEquals(0, list.get(1));
+		assertEquals(-1, list.get(3));
+	}
+
+	@Test
+	public void myLinkedListWrongGetTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		try {
+			list.get(1);
+			assertTrue(false);
+		} catch (IllegalArgumentException i) {
+			assertTrue(true);
+		}
+	}
+
+	@Test
+	public void myLinkedListIndexOfTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		list.add(1);
+		list.add(2);
+		assertEquals(0, list.indexOf(0));
+		assertEquals(1, list.indexOf(1));
+		assertEquals(2, list.indexOf(2));
+	}
+
+	@Test
+	public void myLinkedListRemoveTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		list.add(1);
+		list.add(2);
+		list.remove(1);
+		assertEquals(0, list.get(0));
+		assertEquals(2, list.get(1));
+	}
+
+	@Test
+	public void myLinkedListSetTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		list.add(1);
+		list.add(2);
+		list.set(1, -1);
+		assertEquals(-1, list.get(1));
+	}
+
+	@Test
+	public void myLinkedListSizeTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		list.add(1);
+		list.add(2);
+		assertEquals(3, list.size());
+	}
+
+	@Test
+	public void myLinkedListToArrayTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		list.add(1);
+		list.add(2);
+		Integer[] i = list.toArray();
+		assertEquals(i[0], list.get(0));
+		assertEquals(i[1], list.get(1));
+		assertEquals(i[2], list.get(2));
+	}
+
+	@Test
+	public void myLinkedListIteratorTest() {
+		ILinkedList<Integer> list = new MyLinkedList<>();
+		list.add(0);
+		list.add(1);
+		list.add(2);
+		Iterator<Integer> iter = list.iterator();
+		int k = 0;
+		while (iter.hasNext()) {
+			assertEquals(k, iter.next());
+			k++;
+		}
+	}
+
+	@Test
+	public void authorEqualTest() {
+		Author a = new Author("A", "A", 'M');
+		Author b = new Author("A", "A", 'M');
+		Author c = new Author("C", "C", 'F');
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void bookEqualTest() {
+		Author[] author = { new Author("A", "A", 'M'), new Author("C", "C", 'F') };
+		Book a = new Book("A", author, 1);
+		Book b = new Book("A", author, 1);
+		Book c = new Book("C", author, 1);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void circleEqualTest() {
+		Circle a = new Circle();
+		Circle b = new Circle();
+		Circle c = new Circle(3);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void eployeeEqualTest() {
+		Employee a = new Employee(1, "A", "A", 1);
+		Employee b = new Employee(1, "A", "A", 1);
+		Employee c = new Employee(1, "A", "B", 1);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void myPointEqualTest() {
+		MyPoint a = new MyPoint();
+		MyPoint b = new MyPoint();
+		MyPoint c = new MyPoint(3, 5);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void myTriangleEqualTest() {
+		MyPoint v1 = new MyPoint();
+		MyPoint v2 = new MyPoint();
+		MyPoint v3 = new MyPoint(3, 5);
+		MyTriangle a = new MyTriangle(v1, v2, v3);
+		MyTriangle b = new MyTriangle(v1, v2, v3);
+		MyTriangle c = new MyTriangle(v3, v2, v1);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void rectangleEqualTest() {
+		Rectangle a = new Rectangle();
+		Rectangle b = new Rectangle();
+		Rectangle c = new Rectangle(3, 5);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void ballEqualTest() {
+		Ball a = new Ball(1, 1, 1, 1, 1);
+		Ball b = new Ball(1, 1, 1, 1, 1);
+		Ball c = new Ball(1, 1, 1, 3, 5);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void containerEqualTest() {
+		Container a = new Container(1, 1, 1, 1);
+		Container b = new Container(1, 1, 1, 1);
+		Container c = new Container(1, 1, 3, 5);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void myComplexEqualTest() {
+		MyComplex a = new MyComplex();
+		MyComplex b = new MyComplex();
+		MyComplex c = new MyComplex(3, 5);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+	}
+
+	@Test
+	public void myPolinomialEqualTest() {
+		MyPolynomial a = new MyPolynomial();
+		MyPolynomial b = new MyPolynomial();
+		MyPolynomial c = new MyPolynomial(3, 5);
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
 	}
 }

@@ -18,6 +18,40 @@ public class MyTriangle {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (v1.getX() * v2.getY());
+		result = prime * result + (int) (v2.getX() * v3.getY());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		MyTriangle triangle = (MyTriangle) obj;
+		if ((this.v1.equals(triangle.getV1())) && (this.v2.equals(triangle.getV2()))
+				&& (this.v3.equals(triangle.getV3())))
+			return true;
+		else
+			return false;
+	}
+
+	public MyPoint getV1() {
+		return v1;
+	}
+
+	public MyPoint getV2() {
+		return v2;
+	}
+
+	public MyPoint getV3() {
+		return v3;
+	}
+
+	@Override
 	public String toString() {
 		return "MyTriangle[v1=" + v1 + ",v2=" + v2 + ",v3=" + v3 + "]";
 	}

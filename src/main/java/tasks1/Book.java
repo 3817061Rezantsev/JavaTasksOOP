@@ -19,6 +19,34 @@ public class Book {
 		this.qty = qty;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) price + name.length();
+		result = prime * result + authors.length + qty;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		Book book = (Book) obj;
+		if (this.authors.length != book.getAuthors().length)
+			return false;
+		for (int i = 0; i < authors.length; i++) {
+			if (!authors[i].equals(book.getAuthors()[i])) {
+				return false;
+			}
+		}
+		if ((this.name.equals(book.getName())) && (this.qty == book.getQty()) && (this.price == book.getPrice()))
+			return true;
+		else
+			return false;
+	}
+
 	public String getName() {
 		return name;
 	}

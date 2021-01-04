@@ -1,5 +1,7 @@
 package tasks2;
 
+import tasks1.MyPoint;
+
 public class Ball {
 	private float x;
 	private float y;
@@ -13,6 +15,28 @@ public class Ball {
 		this.radius = radius;
 		xDelta = (float) (speed * Math.cos(direction * Math.PI / 180));
 		yDelta = (float) (-speed * Math.sin(direction * Math.PI / 180));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) x + radius;
+		result = prime * result + (int) y;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		Ball ball = (Ball) obj;
+		if ((this.x == ball.getX()) && (this.y == ball.getY()) && (this.radius == ball.getRadius())
+				&& (this.xDelta == ball.getXDelta()) && (this.yDelta == ball.getYDelta()))
+			return true;
+		else
+			return false;
 	}
 
 	public float getX() {

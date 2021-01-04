@@ -1,5 +1,7 @@
 package tasks2;
 
+import tasks1.Book;
+
 public class MyPolynomial {
 	private double[] coeffs;
 
@@ -11,6 +13,31 @@ public class MyPolynomial {
 		return coeffs;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) coeffs[0];
+		result = prime * result + coeffs.length;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		MyPolynomial pol = (MyPolynomial) obj;
+		if (this.coeffs.length != pol.getCoeffs().length)
+			return false;
+		for (int i = 0; i < coeffs.length; i++) {
+			if (!(coeffs[i] == pol.getCoeffs()[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public int getDegree() {
 		return coeffs.length;
 	}
@@ -20,21 +47,35 @@ public class MyPolynomial {
 		if (coeffs.length == 1) {
 			return "" + coeffs[0];
 		}
-		
+
 		if (coeffs.length == 2) {
+			if (coeffs[1] == 0) {
+				return "" + coeffs[0];
+			}
 			String s = coeffs[coeffs.length - 1] == 1 ? "" : "" + coeffs[coeffs.length - 1];
 			String res = s + "x";
 			res += "+" + coeffs[0];
 			return res;
 		}
 		String s = coeffs[coeffs.length - 1] == 1 ? "" : "" + coeffs[coeffs.length - 1];
-		String res = s + "x^" + (coeffs.length - 1);
+		String res = coeffs[coeffs.length - 1] == 0 ? "" : s + "x^" + (coeffs.length - 1);
 		for (int i = coeffs.length - 2; i > 1; i--) {
+			if (coeffs[i] == 0)
+				continue;
 			s = coeffs[i] == 1 ? "" : "" + coeffs[i];
-			res += "+" + s + "x^" + i;
+			if (res.equals("")) {
+				res += s + "x^" + i;
+			} else {
+				res += "+" + s + "x^" + i;
+			}
 		}
-		res += "+" + coeffs[1] + "x";
-		res += "+" + coeffs[0];
+		if (coeffs[1] != 0)
+			res += "+" + coeffs[1] + "x";
+		if ((coeffs[0] == 0) && res.equals("")) {
+			res += "0";
+		} else {
+			res += "+" + coeffs[0];
+		}
 		return res;
 	}
 
