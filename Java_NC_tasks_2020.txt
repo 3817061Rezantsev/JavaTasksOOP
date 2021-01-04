@@ -1,0 +1,23 @@
+I. Задача по коллекциям - смотрим в файле Java_task_Collections_part1
+* По итогам выполнения задачи необходимо предоставить выводы (можно прямо в readme в репозитории)
+
+II. Переопределить методы equals и hashCode для классов из заданий OOP, OOP2
+* Для тестовых классов с методом main переопределять ничего не нужно
+
+III. Решить задачи из книги 
+"Core Java SE 9 for the Impatient" Cay S. Horstmann
+
+1. Fundamental Programming Structures
+ex 1-10, 13, 14
+
+2. Object Oriented Programming
+ex 5, 9
+
+3. Interfaces and Lambda expressions
+ex 1-5, 8-13
+
+4. Inheritance and reflection
+ex 1-7
+по желанию рефлексия - ex 8-13
+
+DD - 12.01.2021 12.00
