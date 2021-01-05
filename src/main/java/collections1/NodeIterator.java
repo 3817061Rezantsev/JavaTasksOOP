@@ -21,4 +21,9 @@ public class NodeIterator<E> implements Iterator<E> {
 		return element;
 	}
 
+	public Node<E> nextNode() {
+		Node<E> next = node;
+		node = node.getNextNode();
+		return next;
+	}
 }

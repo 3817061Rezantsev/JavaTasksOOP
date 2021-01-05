@@ -28,33 +28,33 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 
 	@Override
 	public void add(E element) {
+		Node<E> newNode = new Node<>(element);
 		if (node == null) {
-			node = new Node<E>(element);
-			tail = node;
+			node = tail = newNode;
 		} else {
-			tail.setNextNode(new Node<E>(element));
-			tail = tail.getNextNode();
+			tail.setNextNode(newNode);
+			tail = newNode;
 		}
 	}
 
 	@Override
 	public void add(int index, E element) {
-		int i = 0;
-		Node<E> B = node;
 		if (index == 0) {
 			node = new Node<E>(element, node);
 		} else {
 			if (node == null) {
 				throw new IllegalStateException();
 			}
-			while ((B.getNextNode() != null) && (i != index - 1)) {
-				B = B.getNextNode();
-				i++;
+			int posithion = 0;
+			NodeIterator<E> iter = (NodeIterator<E>) node.iterator();
+			while (iter.hasNext() && (posithion != index - 1)) {
+				iter.next();
+				posithion++;
 			}
-			if (i != index - 1) {
+			if (posithion != index - 1) {
 				throw new IllegalArgumentException();
 			}
-			B.setNextNode(new Node<E>(element, B.getNextNode()));
+			iter.nextNode().setNextNode(new Node<E>(element, iter.nextNode()));
 		}
 	}
 
@@ -68,16 +68,16 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 		if (node == null) {
 			throw new IllegalStateException();
 		}
-		int i = 0;
-		Node<E> B = node;
-		while ((B.getNextNode() != null) && (i != index)) {
-			B = B.getNextNode();
-			i++;
+		int position = 0;
+		Iterator<E> iter = node.iterator();
+		while (iter.hasNext() && (position != index)) {
+			iter.next();
+			position++;
 		}
-		if (i != index) {
+		if ((position != index) || !iter.hasNext()) {
 			throw new IllegalArgumentException();
 		}
-		return B.getElement();
+		return iter.next();
 	}
 
 	@Override
@@ -85,16 +85,15 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 		if (node == null) {
 			throw new IllegalStateException();
 		}
-		int i = 0;
-		Node<E> B = node;
-		while ((B.getNextNode() != null) && (!B.getElement().equals(element))) {
-			B = B.getNextNode();
-			i++;
+		int index = 0;
+		Iterator<E> iter = node.iterator();
+		while (iter.hasNext()) {
+			if (iter.next().equals(element)) {
+				return index;
+			}
+			index++;
 		}
-		if (!B.getElement().equals(element)) {
-			throw new IllegalArgumentException();
-		}
-		return i;
+		return -1;
 	}
 
 	@Override
@@ -103,18 +102,18 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 			throw new IllegalStateException();
 		}
 		int i = 0;
-		Node<E> B = node;
-		Node<E> C = node;
-		while ((B.getNextNode() != null) && (i != index)) {
-			C = B;
-			B = B.getNextNode();
+		Node<E> delNode = node;
+		Node<E> prev = node;
+		while ((delNode.getNextNode() != null) && (i != index)) {
+			prev = delNode;
+			delNode = delNode.getNextNode();
 			i++;
 		}
 		if (i != index) {
 			throw new IllegalArgumentException();
 		}
-		C.setNextNode(B.getNextNode());
-		return B.getElement();
+		prev.setNextNode(delNode.getNextNode());
+		return delNode.getElement();
 	}
 
 	@Override
@@ -123,30 +122,30 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 			throw new IllegalStateException();
 		}
 		int i = 0;
-		Node<E> B = node;
-		while ((B.getNextNode() != null) && (i != index)) {
-			B = B.getNextNode();
+		Node<E> change = node;
+		while ((change.getNextNode() != null) && (i != index)) {
+			change = change.getNextNode();
 			i++;
 		}
 		if (i != index) {
 			throw new IllegalArgumentException();
 		}
-		B.setElement(element);
-		return B.getElement();
+		change.setElement(element);
+		return change.getElement();
 	}
 
 	@Override
 	public int size() {
-		int i = 1;
 		if (node == null) {
 			return 0;
 		}
-		Node<E> B = node;
-		while (B.getNextNode() != null) {
-			B = B.getNextNode();
-			i++;
+		int size = 0;
+		Iterator<E> iter = node.iterator();
+		while (iter.hasNext()) {
+			iter.next();
+			size++;
 		}
-		return i;
+		return size;
 	}
 
 	@Override
@@ -158,27 +157,25 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 		Class<E> clazz = (Class<E>) node.getElement().getClass();
 		@SuppressWarnings("unchecked")
 		E[] arr = (E[]) Array.newInstance(clazz, this.size());
-		Node<E> B = node;
 		int i = 0;
-		arr[i] = B.getElement();
-		while ((B.getNextNode() != null)) {
-			B = B.getNextNode();
+		Iterator<E> iter = node.iterator();
+		while (iter.hasNext()) {
+			arr[i] = iter.next();
 			i++;
-			arr[i] = B.getElement();
 		}
 		return arr;
 	}
 
 	@Override
 	public String toString() {
-		Node<E> B = node;
-		String res = "MyLinkedList[nodes={" + B.toString();
-		while ((B.getNextNode() != null)) {
-			B = B.getNextNode();
-			res += "," + B.toString();
+		StringBuffer sb = new StringBuffer("MyLinkedList[nodes={");
+		Iterator<E> iter = node.iterator();
+		while (iter.hasNext()) {
+			sb.append(",");
+			sb.append(iter.next());
 		}
-		res += "}]";
-		return res;
+		sb.append("}]");
+		return sb.toString();
 	}
 
 }
