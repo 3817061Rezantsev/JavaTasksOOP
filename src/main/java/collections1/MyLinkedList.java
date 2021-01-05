@@ -23,9 +23,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 	public Iterator<E> iterator() {
 		if (node == null)
 			return null;
-		Node<E> temp = new Node<E>(node.getElement(), node);
-		Iterator<E> iter = temp.iterator();
-		return iter;
+		return node.iterator();
 	}
 
 	@Override

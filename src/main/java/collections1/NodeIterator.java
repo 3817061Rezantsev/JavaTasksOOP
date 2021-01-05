@@ -11,16 +11,14 @@ public class NodeIterator<E> implements Iterator<E> {
 
 	@Override
 	public boolean hasNext() {
-		if ((node != null) && (node.getNextNode() != null)) {
-			node = node.getNextNode();
-			return true;
-		}
-		return false;
+		return node != null;
 	}
 
 	@Override
 	public E next() {
-		return node.getElement();
+		E element = node.getElement();
+		node = node.getNextNode();
+		return element;
 	}
 
 }
