@@ -19,7 +19,7 @@ public class Node<E> {
 		this.nextNode = nextNode;
 	}
 
-	public E getNode() {
+	public E getElement() {
 		return element;
 	}
 
@@ -37,7 +37,7 @@ public class Node<E> {
 
 	@Override
 	public String toString() {
-		return "Node[element=" + element.toString() + "]";
+		return "Node[element=" + String.valueOf(element) + "]";
 	}
 
 	public Iterator<E> iterator() {

@@ -20,7 +20,7 @@ public class NodeIterator<E> implements Iterator<E> {
 
 	@Override
 	public E next() {
-		return node.getNode();
+		return node.getElement();
 	}
 
 }

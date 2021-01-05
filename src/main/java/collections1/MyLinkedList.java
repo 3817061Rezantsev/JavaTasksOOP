@@ -23,7 +23,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 	public Iterator<E> iterator() {
 		if (node == null)
 			return null;
-		Node<E> temp = new Node<E>(node.getNode(), node);
+		Node<E> temp = new Node<E>(node.getElement(), node);
 		Iterator<E> iter = temp.iterator();
 		return iter;
 	}
@@ -79,7 +79,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 		if (i != index) {
 			throw new IllegalArgumentException();
 		}
-		return B.getNode();
+		return B.getElement();
 	}
 
 	@Override
@@ -89,11 +89,11 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 		}
 		int i = 0;
 		Node<E> B = node;
-		while ((B.getNextNode() != null) && (!B.getNode().equals(element))) {
+		while ((B.getNextNode() != null) && (!B.getElement().equals(element))) {
 			B = B.getNextNode();
 			i++;
 		}
-		if (!B.getNode().equals(element)) {
+		if (!B.getElement().equals(element)) {
 			throw new IllegalArgumentException();
 		}
 		return i;
@@ -116,7 +116,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 			throw new IllegalArgumentException();
 		}
 		C.setNextNode(B.getNextNode());
-		return B.getNode();
+		return B.getElement();
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 			throw new IllegalArgumentException();
 		}
 		B.setElement(element);
-		return B.getNode();
+		return B.getElement();
 	}
 
 	@Override
@@ -157,16 +157,16 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 			return null;
 		}
 		@SuppressWarnings("unchecked")
-		Class<E> clazz = (Class<E>) node.getNode().getClass();
+		Class<E> clazz = (Class<E>) node.getElement().getClass();
 		@SuppressWarnings("unchecked")
 		E[] arr = (E[]) Array.newInstance(clazz, this.size());
 		Node<E> B = node;
 		int i = 0;
-		arr[i] = B.getNode();
+		arr[i] = B.getElement();
 		while ((B.getNextNode() != null)) {
 			B = B.getNextNode();
 			i++;
-			arr[i] = B.getNode();
+			arr[i] = B.getElement();
 		}
 		return arr;
 	}
