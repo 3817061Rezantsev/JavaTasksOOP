@@ -168,7 +168,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer("MyLinkedList[nodes={");
+		StringBuilder sb = new StringBuilder("MyLinkedList[nodes={");
 		Iterator<E> iter = node.iterator();
 		while (iter.hasNext()) {
 			sb.append(",");
