@@ -13,6 +13,16 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class MainClass {
+	private static void checkPerformance(String desc, Runnable f) {
+		final int NUM_OF_ITERATIONS = 10000;
+		long start = System.nanoTime();
+		for (int i = 0; i < NUM_OF_ITERATIONS; i++) {
+			f.run();
+		}
+		long elapsedTime = (System.nanoTime() - start) / NUM_OF_ITERATIONS;
+		System.out.println(desc + elapsedTime + " ms");
+	}
+
 	public static void main(String args[]) {
 		Node<Integer> node = new Node<>(2);
 		// System.out.println(node);
@@ -20,6 +30,9 @@ public class MainClass {
 		list.add(0);
 		list.add(1);
 		list.add(2);
+		for (Integer i : list) {
+			//System.out.println(i);
+		}
 		// System.out.println(list);
 		list.clear();
 		List<Integer> ilist = new LinkedList<>();
@@ -41,291 +54,121 @@ public class MainClass {
 			lmap.put(i, i);
 			tmap.put(i, i);
 		}
-		long start, end, elapsedTime;
-		System.out.println("MyLinkedList and LinkedList");
-		System.out.print("MyList - ");
-		System.out.print("Add end: ");
-		start = System.nanoTime();
-		list.add(1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Add mid: ");
-		start = System.nanoTime();
-		list.add(5000, 1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Add begin: ");
-		start = System.nanoTime();
-		list.add(0, 1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nList - ");
-		System.out.print("Add end: ");
-		start = System.nanoTime();
-		ilist.add(1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Add mid: ");
-		start = System.nanoTime();
-		ilist.add(5000, 1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Add begin: ");
-		start = System.nanoTime();
-		ilist.add(0, 1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nMyList - ");
-		System.out.print("Remove end: ");
-		start = System.nanoTime();
-		list.remove(10000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove mid :");
-		start = System.nanoTime();
-		list.remove(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove begin: ");
-		start = System.nanoTime();
-		list.remove(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nList - ");
-		System.out.print("Remove end :");
-		start = System.nanoTime();
-		ilist.remove(10000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove mid :");
-		start = System.nanoTime();
-		ilist.remove(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove begin: ");
-		start = System.nanoTime();
-		ilist.remove(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nMyList - ");
-		System.out.print("Get end: ");
-		start = System.nanoTime();
-		list.get(10000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get mid: ");
-		start = System.nanoTime();
-		list.get(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get begin: ");
-		start = System.nanoTime();
-		list.get(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nList - ");
-		System.out.print("Get end: ");
-		start = System.nanoTime();
-		ilist.get(9999);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get mid: ");
-		start = System.nanoTime();
-		ilist.get(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get begin: ");
-		start = System.nanoTime();
-		ilist.get(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.println("\nArrayList:");
-		System.out.print("Add end: ");
-		start = System.nanoTime();
-		alist.add(1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Add mid: ");
-		start = System.nanoTime();
-		alist.add(5000, 1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Add begin: ");
-		start = System.nanoTime();
-		alist.add(0, 1);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nRemove end: ");
-		start = System.nanoTime();
-		alist.remove(10000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove mid :");
-		start = System.nanoTime();
-		alist.remove(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove begin: ");
-		start = System.nanoTime();
-		alist.remove(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nGet end: ");
-		start = System.nanoTime();
-		alist.get(9999);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get mid: ");
-		start = System.nanoTime();
-		alist.get(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get begin: ");
-		start = System.nanoTime();
-		alist.get(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nHashSet - ");
-		System.out.print("Add: ");
-		start = System.nanoTime();
-		hset.add(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove: ");
-		start = System.nanoTime();
-		hset.remove(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Contains ");
-		start = System.nanoTime();
-		hset.contains(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nLinkedHashSet - ");
-		System.out.print("Add: ");
-		start = System.nanoTime();
-		lhset.add(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove: ");
-		start = System.nanoTime();
-		lhset.remove(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Contains ");
-		start = System.nanoTime();
-		lhset.contains(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nTreeSet - ");
-		System.out.print("Add: ");
-		start = System.nanoTime();
-		tset.add(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove: ");
-		start = System.nanoTime();
-		tset.remove(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Contains ");
-		start = System.nanoTime();
-		tset.contains(5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nHashMap - ");
-		System.out.print("Add: ");
-		start = System.nanoTime();
-		map.put(5000, 5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove: ");
-		start = System.nanoTime();
-		map.remove(10000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get: ");
-		start = System.nanoTime();
-		map.get(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nLinkedHashMap - ");
-		System.out.print("Add: ");
-		start = System.nanoTime();
-		lmap.put(5000, 5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove: ");
-		start = System.nanoTime();
-		lmap.remove(10000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get: ");
-		start = System.nanoTime();
-		lmap.get(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print("\nTreeMap - ");
-		System.out.print("Add: ");
-		start = System.nanoTime();
-		tmap.put(5000, 5000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Remove: ");
-		start = System.nanoTime();
-		tmap.remove(10000);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
-		System.out.print(" Get: ");
-		start = System.nanoTime();
-		tmap.get(0);
-		end = System.nanoTime();
-		elapsedTime = end - start;
-		System.out.print(elapsedTime);
+		checkPerformance("MyLinkedList::add end --> ", () -> {
+			list.add(1);
+		});
+		checkPerformance("MyLinkedList::add mid --> ", () -> {
+			list.add(5000, 1);
+		});
+		checkPerformance("ArrayList::add end --> ", () -> {
+			alist.add(1);
+		});
+		checkPerformance("ArrayList::add mid --> ", () -> {
+			alist.add(5000, 1);
+		});
+		checkPerformance("LinkedList::add end --> ", () -> {
+			ilist.add(1);
+		});
+		checkPerformance("LinkedList::add mid --> ", () -> {
+			ilist.add(5000, 1);
+		});
 
+		checkPerformance("MyLinkedList::remove end --> ", () -> {
+			list.remove(10000);
+		});
+		checkPerformance("MyLinkedList::remove mid --> ", () -> {
+			list.remove(5000);
+		});
+		checkPerformance("ArrayList::remove end --> ", () -> {
+			alist.remove(10000);
+		});
+		checkPerformance("ArrayList::remove mid --> ", () -> {
+			alist.remove(5000);
+		});
+		checkPerformance("LinkedList::remove end --> ", () -> {
+			ilist.remove(1);
+		});
+		checkPerformance("LinkedList::remove mid --> ", () -> {
+			ilist.remove(5000);
+		});
+
+		checkPerformance("MyLinkedList::get end --> ", () -> {
+			 list.get(9999);
+		});
+		checkPerformance("MyLinkedList::get mid --> ", () -> {
+			 list.get(5000);
+		});
+		checkPerformance("ArrayList::get end --> ", () -> {
+			alist.get(9999);
+		});
+		checkPerformance("ArrayList::get mid --> ", () -> {
+			alist.get(5000);
+		});
+		checkPerformance("LinkedList::get end --> ", () -> {
+			ilist.get(9999);
+		});
+		checkPerformance("LinkedList::get mid --> ", () -> {
+			ilist.get(5000);
+		});
+
+		checkPerformance("HashSet::add --> ", () -> {
+			hset.add(5000);
+		});
+		checkPerformance("HashSet::remove --> ", () -> {
+			hset.remove(5000);
+		});
+		checkPerformance("HashSet::contains --> ", () -> {
+			hset.contains(5000);
+		});
+
+		checkPerformance("LinkedHashSet::add --> ", () -> {
+			lhset.add(5000);
+		});
+		checkPerformance("LinkedHashSet::remove --> ", () -> {
+			lhset.remove(5000);
+		});
+		checkPerformance("LinkedHashSet::contains --> ", () -> {
+			lhset.contains(5000);
+		});
+
+		checkPerformance("TreeSet::add --> ", () -> {
+			tset.add(5000);
+		});
+		checkPerformance("TreeSet::remove --> ", () -> {
+			tset.remove(5000);
+		});
+		checkPerformance("TreeSet::contains --> ", () -> {
+			tset.contains(5000);
+		});
+
+		checkPerformance("HashMap::put --> ", () -> {
+			map.put(5000, 5000);
+		});
+		checkPerformance("HashMap::remove --> ", () -> {
+			map.remove(10000);
+		});
+		checkPerformance("HashMap::get --> ", () -> {
+			map.get(0);
+		});
+
+		checkPerformance("LinkedHashMap::put --> ", () -> {
+			lmap.put(5000, 5000);
+		});
+		checkPerformance("LinkedHashMap::remove --> ", () -> {
+			lmap.remove(10000);
+		});
+		checkPerformance("LinkedHashMap::get --> ", () -> {
+			lmap.get(0);
+		});
+
+		checkPerformance("TreeMap::put --> ", () -> {
+			tmap.put(5000, 5000);
+		});
+		checkPerformance("TreeMap::remove --> ", () -> {
+			tmap.remove(10000);
+		});
+		checkPerformance("TreeMap::get --> ", () -> {
+			tmap.get(0);
+		});
 	}
 }

@@ -30,11 +30,15 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 	public void add(E element) {
 		Node<E> newNode = new Node<>(element);
 		if (node == null) {
-			node = tail = newNode;
+			node = newNode;
+		} else if (node.getNextNode() == null) {
+			tail = newNode;
+			node.setNextNode(tail);
 		} else {
 			tail.setNextNode(newNode);
 			tail = newNode;
 		}
+
 	}
 
 	@Override
@@ -60,7 +64,12 @@ public class MyLinkedList<E> implements ILinkedList<E> {
 
 	@Override
 	public void clear() {
-		node = null;
+		for (Node<E> x = node; x != null;) {
+			Node<E> next = x.getNextNode();
+			x.setElement(null);
+			x.setNextNode(null);
+			x = next;
+		}
 	}
 
 	@Override

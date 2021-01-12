@@ -168,6 +168,12 @@ class homeworkTests {
 		list.add(0);
 		list.add(-1);
 		list.add(2);
+		list.add(2);
+		list.add(2);
+		list.add(2);
+		list.add(2);
+		list.add(2);
+		list.add(2);
 		assertEquals(0, list.get(0));
 		assertEquals(-1, list.get(1));
 		assertEquals(2, list.get(2));
@@ -178,6 +184,7 @@ class homeworkTests {
 		assertEquals(5, list.get(2));
 		assertEquals(0, list.get(1));
 		assertEquals(-1, list.get(3));
+		list.add(4, 5);
 	}
 
 	@Test
@@ -255,6 +262,11 @@ class homeworkTests {
 		int k = 0;
 		while (iter.hasNext()) {
 			assertEquals(k, iter.next());
+			k++;
+		}
+		k = 0;
+		for (Integer i : list) {
+			assertEquals(k, i);
 			k++;
 		}
 	}
